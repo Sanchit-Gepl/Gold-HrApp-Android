@@ -6,8 +6,10 @@ object GlobalConstant {
     const val TYPE_NO_DATA = 10000
 
     const val BASE_URL = "https://api.goldmedalindia.in/api/"
+    const val BASE_NET_URL = "https://api.goldmedalindia.net/api/"
     const val TEST_BASE_URL = "https://goldapi-uat.goldmedalindia.in/api/hrm/v1/"
     const val HRM_BASE_URL = "https://goldapi.goldmedalindia.in/api/hrm/v1.0/"
+    const val HRM_BASE_NET_URL = "https://goldapi.goldmedalindia.net/api/hrm/v1.0/"
     private const val IS_LIVE = true // todo - change value for live
     var BASE_URL_MAIN = if(IS_LIVE) HRM_BASE_URL else TEST_BASE_URL
 
