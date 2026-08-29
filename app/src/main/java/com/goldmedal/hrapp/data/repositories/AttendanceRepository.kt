@@ -42,10 +42,8 @@ class AttendanceRepository @Inject constructor(private val api: MyApi,
             if (lastSavedAt == null || isFetchNeeded(LocalDateTime.parse(lastSavedAt))) {
                 try {
                     val response = apiRequest { api.getAllAttendanceData(userId!!, fromDate, toDate, GlobalConstant.CLIENT_ID, GlobalConstant.CLIENT_SECRET) }
-
-
-                    response.attendanceData.let {
-                        attendanceData.postValue(response.attendanceData)
+                    response.attendanceData?.let {
+                        attendanceData.postValue(it)
                     }
                 } catch (e: ApiException) {
                 } catch (e: NoInternetException) {
