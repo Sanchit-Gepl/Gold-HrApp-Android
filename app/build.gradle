@@ -25,15 +25,15 @@ plugins {
 
 android {
     namespace 'com.goldmedal.hrapp'
-    compileSdk 35
+    compileSdk 36
     defaultConfig {
         applicationId "com.goldmedal.hrapp"
         minSdk 24
-        targetSdk 35
-        versionCode 32
+        targetSdk 36
+        versionCode 36
 //        versionName "1.0_distribute_build"
 //        versionName "1.0_development_build"
-        versionName "1.17"
+        versionName "1.21"
         multiDexEnabled true
         //testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

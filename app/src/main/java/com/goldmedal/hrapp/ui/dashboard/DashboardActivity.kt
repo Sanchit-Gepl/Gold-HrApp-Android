@@ -10,6 +10,7 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -91,6 +92,7 @@ class DashboardActivity : AppCompatActivity(),  UpdateAppDialogFragment.OnCancel
 
         binding.appBarHomeScreen.bottomNavContent.bottomNav.setupWithNavController(navController)
         binding.navigationView.setupWithNavController(navController)
+        setupBackPressed()
 
         val logoutItem = binding.navigationView.menu.findItem(R.id.actionLogout)
         logoutItem.setOnMenuItemClickListener {
@@ -273,25 +275,49 @@ class DashboardActivity : AppCompatActivity(),  UpdateAppDialogFragment.OnCancel
         navMenu.findItem(R.id.accountsDetailActivity).isVisible = false
     }
 
-
-    override fun onBackPressed() {
-        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            binding.drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            if (navController.currentDestination?.id == R.id.homeFragment) {
-                if (mToast?.view?.isShown == false) {
-                    mToast?.show()
+    private fun setupBackPressed() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    binding.drawerLayout.closeDrawer(GravityCompat.START)
                     return
-                } else {
-                    //Exit App
-                    super.onBackPressed()
                 }
 
+                if (navController.currentDestination?.id == R.id.homeFragment) {
+                    if (mToast?.view?.isShown == false) {
+                        mToast?.show()
+                        return
+                    }
+                }
+
+                // Navigate back in NavController; if nothing to pop, close the Activity.
+                if (!navController.popBackStack()) {
+                    finish()
+                }
             }
-            //Move back to home
-            super.onBackPressed()
-        }
+        })
     }
+
+
+    // Previous implementation kept for reference after migration to OnBackPressedDispatcher.
+//    override fun onBackPressed() {
+//        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+//            binding.drawerLayout.closeDrawer(GravityCompat.START)
+//        } else {
+//            if (navController.currentDestination?.id == R.id.homeFragment) {
+//                if (mToast?.view?.isShown == false) {
+//                    mToast?.show()
+//                    return
+//                } else {
+//                    //Exit App
+//                    super.onBackPressed()
+//                }
+//
+//            }
+//            //Move back to home
+//            super.onBackPressed()
+//        }
+//    }
 
 
     override fun onSupportNavigateUp(): Boolean {
