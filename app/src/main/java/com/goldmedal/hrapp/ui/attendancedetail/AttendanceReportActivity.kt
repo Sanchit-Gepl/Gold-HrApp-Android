@@ -367,7 +367,7 @@ class AttendanceReportActivity : BaseActivity(), OnDateSelectedListener, ApiStag
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 

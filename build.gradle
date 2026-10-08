@@ -7,7 +7,9 @@ buildscript {
     ext.hilt_version = '2.56.2'
     ext.nav_version = '2.5.1'
     ext {
-        agp_version = '8.6.0'
+       // agp_version = '8.6.0'
+        agp_version1 = '8.9.1'
+
     }
     repositories {
         google()
@@ -16,7 +18,7 @@ buildscript {
     }
     dependencies {
 
-        classpath "com.android.tools.build:gradle:$agp_version"
+        classpath "com.android.tools.build:gradle:$agp_version1"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
